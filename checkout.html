@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAKUZA SUSHI — Оформление заказа</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-utensils text-danger"></i> 
+                <strong>YAKUZA</strong> SUSHI
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ml-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Меню</a></li>
+                    <li class="nav-item"><a class="nav-link text-danger" href="checkout.html">Доставка</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
+                    <li class="nav-item ml-3"><a class="nav-link" href="tel:+79991234567">+7 (999) 123-45-67</a></li>
+                    <li class="nav-item ml-3">
+                        <a class="btn btn-danger btn-sm" href="#">
+                            <i class="fas fa-shopping-cart"></i> 1200 ₽
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="card p-4">
+                    <h3 class="mb-4">Оформление заказа</h3>
+                    <form>
+                        <div class="form-group">
+                            <label>ФИО</label>
+                            <input type="text" class="form-control" placeholder="Иванов Иван Иванович">
+                        </div>
+                        <div class="form-group">
+                            <label>Номер телефона</label>
+                            <input type="tel" class="form-control" placeholder="+7 (999) 123-45-67">
+                        </div>
+                        <div class="form-group">
+                            <label>Адрес</label>
+                            <input type="text" class="form-control" placeholder="Комсомольский проспект 71/2">
+                        </div>
+                        <div class="form-group">
+                            <label>Комментарий для курьера</label>
+                            <textarea class="form-control" rows="3" placeholder="Если у вас в подъезде требуется позвонить по домофону, то выберите из списка..."></textarea>
+                        </div>
+                        <p class="text-muted">Доставка 10-15 мин</p>
+                        <button type="submit" class="btn btn-warning btn-lg btn-block font-weight-bold">
+                            Оплатить (СБП)
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-block mt-2">Отмена</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-4">
+        <p class="text-muted mb-0">© 2026 YAKUZA SUSHI. Все права защищены.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
