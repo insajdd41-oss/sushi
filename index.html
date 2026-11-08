@@ -8,19 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-utensils text-danger"></i> 
-                <strong>YAKUZA</strong> SUSHI
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-utensils text-danger"></i> <strong>YAKUZA</strong> SUSHI</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ml-auto align-items-center">
                     <li class="nav-item"><a class="nav-link text-danger" href="index.html">Меню</a></li>
@@ -28,31 +21,23 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">О нас</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
                     <li class="nav-item ml-3"><a class="nav-link" href="tel:+79991234567">+7 (999) 123-45-67</a></li>
-                    <li class="nav-item ml-3">
-                        <a class="btn btn-danger btn-sm" href="#">
-                            <i class="fas fa-shopping-cart"></i> 1200 ₽
-                        </a>
-                    </li>
+                    <li class="nav-item ml-3"><a class="btn btn-danger btn-sm" href="#"><i class="fas fa-shopping-cart"></i> 1200 ₽</a></li>
                 </ul>
             </div>
         </div>
     </nav>
  
     <div class="container py-4">
-
         <div class="hero-banner mb-5">
             <span class="badge badge-danger mb-3">АКЦИЯ НЕДЕЛИ</span>
             <h1 class="display-4 font-weight-bold">Скидка 15% на первый заказ!</h1>
             <p class="text-warning h5">Бесплатная доставка от 1500 ₽</p>
         </div>
-
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Популярные блюда</h2>
             <a href="admin-menu.html" class="link-yellow">Смотреть все меню →</a>
         </div>
-
         <div class="row">
-
             <div class="col-12 col-sm-6 col-lg-3 mb-4">
                 <div class="card h-100">
                     <img src="Филадельфия.webp" class="card-img-top" alt="Филадельфия" style="height: 180px; object-fit: cover;">
@@ -61,12 +46,11 @@
                         <h5 class="card-title mt-2">Филадельфия</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="text-danger font-weight-bold h5 mb-0">550 ₽</span>
-                            <button class="btn btn-warning btn-sm add-to-cart" data-product="Филадельфия" data-price="550">В корзину</button>
+                            <button class="btn btn-warning btn-sm">В корзину</button>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="col-12 col-sm-6 col-lg-3 mb-4">
                 <div class="card h-100">
                     <img src="Калифорния.webp" class="card-img-top" alt="Калифорния" style="height: 180px; object-fit: cover;">
@@ -75,12 +59,11 @@
                         <h5 class="card-title mt-2">Калифорния</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="text-danger font-weight-bold h5 mb-0">490 ₽</span>
-                            <button class="btn btn-warning btn-sm add-to-cart" data-product="Калифорния" data-price="490">В корзину</button>
+                            <button class="btn btn-warning btn-sm">В корзину</button>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="col-12 col-sm-6 col-lg-3 mb-4">
                 <div class="card h-100">
                     <img src="Сет.webp" class="card-img-top" alt="Сет Якудза" style="height: 180px; object-fit: cover;">
@@ -89,12 +72,11 @@
                         <h5 class="card-title mt-2">Сет Якудза</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="text-danger font-weight-bold h5 mb-0">1450 ₽</span>
-                            <button class="btn btn-warning btn-sm add-to-cart" data-product="Сет Якудза" data-price="1450">В корзину</button>
+                            <button class="btn btn-warning btn-sm">В корзину</button>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="col-12 col-sm-6 col-lg-3 mb-4">
                 <div class="card h-100">
                     <img src="Креветки.webp" class="card-img-top" alt="Креветки в панировке" style="height: 180px; object-fit: cover;">
@@ -103,14 +85,50 @@
                         <h5 class="card-title mt-2">Креветки в панировке</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="text-danger font-weight-bold h5 mb-0">390 ₽</span>
-                            <button class="btn btn-warning btn-sm add-to-cart" data-product="Креветки в панировке" data-price="390">В корзину</button>
+                            <button class="btn btn-warning btn-sm">В корзину</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-  
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="card p-4">
+                    <h2 class="mb-4">Отзывы наших клиентов</h2>
+                    <form id="review-form">
+                        <div class="form-group">
+                            <label>Ваше имя</label>
+                            <input type="text" class="form-control" id="review-name" name="review-name" placeholder="Как к вам обращаться?" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ваш отзыв</label>
+                            <textarea class="form-control" id="review-text" name="review-text" rows="3" placeholder="Напишите, что вы думаете о наших суши..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning font-weight-bold">Оставить отзыв</button>
+                    </form>
+                    <hr class="my-4" style="border-color: #2a2a40;">
+                    <div id="reviews-list">
+                        <div class="mb-3 p-3" style="background-color: #0f0f1a; border-radius: 8px;">
+                            <strong class="text-warning">Анна</strong> <small class="text-muted ml-2">Сегодня</small>
+                            <p class="mb-0 mt-2">Суши просто огонь! Доставили очень быстро, всё свежее. Спасибо!</p>
+                        </div>
+                        <div class="mb-3 p-3" style="background-color: #0f0f1a; border-radius: 8px;">
+                            <strong class="text-warning">Дмитрий</strong> <small class="text-muted ml-2">Вчера</small>
+                            <p class="mb-0 mt-2">Заказываю уже не первый раз. Сет "Якудза" просто огромный, наелись всей семьей. Рекомендую!</p>
+                        </div>
+                        <div class="mb-3 p-3" style="background-color: #0f0f1a; border-radius: 8px;">
+                            <strong class="text-warning">Екатерина</strong> <small class="text-muted ml-2">3 дня назад</small>
+                            <p class="mb-0 mt-2">Очень вежливый курьер и быстрая доставка. Креветки в панировке хрустящие, как и должны быть.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <footer class="text-center py-4">
         <p class="text-muted mb-0">© 2026 YAKUZA SUSHI. Все права защищены.</p>
     </footer>
@@ -118,9 +136,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/site.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="site.js"></script>
 
-  <!-- Yandex.Metrika counter -->
+    <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -133,6 +152,5 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/114128606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-
 </body>
 </html>

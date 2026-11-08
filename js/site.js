@@ -1,281 +1,130 @@
-document.addEventListener('DOMContentLoaded', function () {
-
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const formData = new FormData(contactForm);
-      const data = Object.fromEntries(formData.entries());
-      console.log('Форма контактов:', data);
-
-      const name = (data.name || '').trim();
-      const email = (data.email || '').trim();
-      const message = (data.message || '').trim();
-
-      if (name.length < 2) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Введите имя (минимум 2 символа)' });
-        return;
-      }
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Введите корректный email' });
-        return;
-      }
-      if (message.length < 10) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Сообщение должно быть не короче 10 символов' });
-        return;
-      }
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Сообщение отправлено',
-        text: 'Спасибо, ' + name + '! Мы ответим вам на ' + email
-      });
-      contactForm.reset();
-    });
-  }
-
-  const checkoutForm = document.getElementById('checkoutForm');
-  if (checkoutForm) {
-    checkoutForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const formData = new FormData(checkoutForm);
-      const data = Object.fromEntries(formData.entries());
-      console.log('Форма заказа:', data);
-
-      const fullname = (data.fullname || '').trim();
-      const phone = (data.phone || '').trim();
-      const address = (data.address || '').trim();
-      const comment = (data.comment || '').trim();
-
-      if (fullname.length < 5 || fullname.split(' ').filter(Boolean).length < 2) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Введите ФИО полностью (минимум фамилия и имя)' });
-        return;
-      }
-      const phoneDigits = phone.replace(/\D/g, '');
-      if (phoneDigits.length < 10 || phoneDigits.length > 11) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Введите корректный номер телефона (10–11 цифр)' });
-        return;
-      }
-      if (address.length < 5) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Введите адрес доставки (минимум 5 символов)' });
-        return;
-      }
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Заказ оформлен!',
-        html: 'Спасибо, <b>' + fullname + '</b>!<br>' +
-              'Доставим по адресу: ' + address + '<br>' +
-              'Курьер свяжется по номеру ' + phone +
-              (comment ? '<br><small>Комментарий: ' + comment + '</small>' : '')
-      });
-      checkoutForm.reset();
-    });
-  }
-
-  document.querySelectorAll('.add-to-cart').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      const product = btn.getAttribute('data-product') || 'Товар';
-      const price = btn.getAttribute('data-price') || '';
-      console.log('Добавлено в корзину:', { product, price });
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Добавлено в корзину',
-        text: product + (price ? ' — ' + price + ' ₽' : ''),
-        timer: 1500,
-        showConfirmButton: false
-      });
-    });
-  });
-
-  document.querySelectorAll('.edit-dish').forEach(function (link) {
-    link.addEventListener('click', function (event) {
-      event.preventDefault();
-      const dish = link.getAttribute('data-dish') || 'блюдо';
-      console.log('Редактирование:', dish);
-      Swal.fire({
-        icon: 'info',
-        title: 'Редактирование',
-        text: 'Открываем редактирование: ' + dish,
-        timer: 1500,
-        showConfirmButton: false
-      });
-    });
-  });
-
-  document.querySelectorAll('.delete-dish').forEach(function (link) {
-    link.addEventListener('click', function (event) {
-      event.preventDefault();
-      const dish = link.getAttribute('data-dish') || 'блюдо';
-      console.log('Удаление:', dish);
-
-      Swal.fire({
-        icon: 'warning',
-        title: 'Удалить блюдо?',
-        text: dish + ' будет удалено из меню',
-        showCancelButton: true,
-        confirmButtonText: 'Удалить',
-        cancelButtonText: 'Отмена',
-        confirmButtonColor: '#dc3545'
-      }).then(function (result) {
-        if (result.isConfirmed) {
-          const row = link.closest('tr');
-          if (row) row.remove();
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Удалено',
-            text: dish + ' удалено из меню',
-            timer: 1500,
-            showConfirmButton: false
-          });
+document.addEventListener('DOMContentLoaded', function() {
+    const cartButtons = document.querySelectorAll('.btn-warning');
+    cartButtons.forEach(button => {
+        if (button.textContent.includes('В корзину')) {
+            button.addEventListener('click', function() {
+                const dishName = this.closest('.card-body').querySelector('.card-title').textContent;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Добавлено в корзину!',
+                    text: `Блюдо "${dishName}" успешно добавлено.`,
+                    confirmButtonColor: '#ffc107',
+                    timer: 2000
+                });
+            });
         }
-      });
-    });
-  });
-
-  const addDishForm = document.getElementById('addDishForm');
-  if (addDishForm) {
-    addDishForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const formData = new FormData(addDishForm);
-      const data = Object.fromEntries(formData.entries());
-      console.log('Новое блюдо:', data);
-
-      const title = (data.title || '').trim();
-      const category = (data.category || '').trim();
-      const price = Number(data.price);
-      const weight = Number(data.weight);
-      const description = (data.description || '').trim();
-      const imageFile = formData.get('image');
-
-      if (title.length < 2) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Введите название блюда (минимум 2 символа)' });
-        return;
-      }
-      if (!category) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Выберите категорию' });
-        return;
-      }
-      if (!price || price <= 0) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Цена должна быть положительным числом' });
-        return;
-      }
-      if (!weight || weight <= 0) {
-        Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Вес должен быть положительным числом' });
-        return;
-      }
-      if (imageFile && imageFile.size > 0) {
-        if (!imageFile.type.startsWith('image/')) {
-          Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Можно загружать только изображения' });
-          return;
-        }
-        if (imageFile.size > 5 * 1024 * 1024) {
-          Swal.fire({ icon: 'error', title: 'Ошибка', text: 'Размер изображения не должен превышать 5 МБ' });
-          return;
-        }
-      }
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Блюдо добавлено!',
-        html: '<b>' + title + '</b><br>' +
-              'Категория: ' + category + '<br>' +
-              'Цена: ' + price + ' ₽<br>' +
-              'Вес: ' + weight + ' г' +
-              (description ? '<br><small>' + description + '</small>' : '')
-      });
-      addDishForm.reset();
-
-      const fileLabel = addDishForm.querySelector('.custom-file-label');
-      if (fileLabel) {
-        fileLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Загрузить файл';
-      }
     });
 
-    const imgInput = document.getElementById('imgInput');
-    if (imgInput) {
-      imgInput.addEventListener('change', function () {
-        const label = addDishForm.querySelector('.custom-file-label');
-        if (!label) return;
-        if (imgInput.files && imgInput.files.length) {
-          label.textContent = imgInput.files[0].name;
-        } else {
-          label.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Загрузить файл';
-        }
-      });
+    const reviewForm = document.forms['review-form'];
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            console.log("Отзыв:", data);
+
+            if (!data['review-name'] || !data['review-text']) {
+                Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Заполните все поля.', confirmButtonColor: '#e94560' });
+                return;
+            }
+
+            const reviewsList = document.getElementById('reviews-list');
+            const newReview = document.createElement('div');
+            newReview.className = 'mb-3 p-3';
+            newReview.style.backgroundColor = '#0f0f1a';
+            newReview.style.borderRadius = '8px';
+            newReview.innerHTML = `<strong class="text-warning">${data['review-name']}</strong> <small class="text-muted ml-2">Только что</small><p class="mb-0 mt-2">${data['review-text']}</p>`;
+            
+            reviewsList.prepend(newReview);
+            this.reset();
+
+            Swal.fire({ icon: 'success', title: 'Спасибо за отзыв!', text: 'Ваше мнение очень важно для нас.', confirmButtonColor: '#ffc107' });
+        });
     }
-  }
 
-  const reviewForm = document.getElementById('review-form');
-  const reviewsList = document.getElementById('reviews-list');
+    const checkoutForm = document.forms['checkout-form'];
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            console.log("Заказ:", data);
 
-  if (reviewForm && reviewsList) {
-    reviewForm.addEventListener('submit', function (event) {
-      event.preventDefault();
+            if (!data['fio'] || !data['phone'] || !data['address']) {
+                Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Заполните ФИО, телефон и адрес.', confirmButtonColor: '#e94560' });
+                return;
+            }
 
-      const formData = new FormData(reviewForm);
-      const data = Object.fromEntries(formData.entries());
-      console.log('Отзыв:', data);
-
-      const name = (data.name || '').trim();
-      const text = (data.text || '').trim();
-
-      if (name.length < 2) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ошибка',
-          text: 'Введите имя (минимум 2 символа)',
-          confirmButtonColor: '#ffc107'
+            Swal.fire({ icon: 'success', title: 'Заказ оформлен!', text: 'Курьер уже выехал к вам.', confirmButtonColor: '#ffc107' }).then(() => {
+                this.reset();
+            });
         });
-        return;
-      }
-      if (text.length < 10) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ошибка',
-          text: 'Отзыв должен быть не короче 10 символов',
-          confirmButtonColor: '#ffc107'
+    }
+
+    const deleteButtons = document.querySelectorAll('.text-danger .fa-trash');
+    deleteButtons.forEach(icon => {
+        icon.addEventListener('click', function(event) {
+            event.preventDefault();
+            const row = this.closest('tr');
+            Swal.fire({
+                title: 'Удалить блюдо?',
+                text: "Вы уверены, что хотите удалить эту позицию из меню?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e94560',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Да, удалить',
+                cancelButtonText: 'Отмена'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    row.remove();
+                    Swal.fire('Удалено!', 'Блюдо удалено из меню.', 'success');
+                }
+            });
         });
-        return;
-      }
-
-      const newReview = document.createElement('div');
-      newReview.className = 'mb-3 p-3';
-      newReview.style.backgroundColor = '#0f0f1a';
-      newReview.style.borderRadius = '8px';
-
-      const nameEl = document.createElement('strong');
-      nameEl.className = 'text-warning';
-      nameEl.textContent = name;
-
-      const timeEl = document.createElement('small');
-      timeEl.className = 'text-muted ml-2';
-      timeEl.textContent = 'Только что';
-
-      const textEl = document.createElement('p');
-      textEl.className = 'mb-0 mt-2';
-      textEl.textContent = text;
-
-      newReview.appendChild(nameEl);
-      newReview.appendChild(timeEl);
-      newReview.appendChild(textEl);
-      reviewsList.prepend(newReview);
-
-      reviewForm.reset();
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Спасибо за отзыв!',
-        text: 'Ваше мнение очень важно для нас.',
-        confirmButtonColor: '#ffc107'
-      });
     });
-  }
 
+    const editButtons = document.querySelectorAll('.text-warning .fa-pen');
+    editButtons.forEach(icon => {
+        icon.addEventListener('click', function(event) {
+            event.preventDefault();
+            const row = this.closest('tr');
+            const dishName = row.querySelector('td:nth-child(2)').textContent;
+            Swal.fire({
+                title: 'Редактирование',
+                text: `Вы открыли редактирование блюда "${dishName}"`,
+                icon: 'info',
+                confirmButtonColor: '#ffc107'
+            });
+        });
+    });
+
+    const addDishForm = document.forms['add-dish-form'];
+    if (addDishForm) {
+        addDishForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            console.log("Новое блюдо:", data);
+
+            if (!data['dish-name'] || !data['dish-price']) {
+                Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Введите название и цену блюда.', confirmButtonColor: '#e94560' });
+                return;
+            }
+
+            Swal.fire({ icon: 'success', title: 'Блюдо добавлено!', text: 'Новая позиция появилась в меню.', confirmButtonColor: '#ffc107' }).then(() => {
+                window.location.href = 'admin-menu.html';
+            });
+        });
+    }
+
+    const cancelButtons = document.querySelectorAll('.btn-secondary');
+    cancelButtons.forEach(button => {
+        if (button.textContent.includes('Отмена')) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                this.closest('form').reset();
+            });
+        }
+    });
 });

@@ -8,19 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-utensils text-danger"></i> 
-                <strong>YAKUZA</strong> SUSHI
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-utensils text-danger"></i> <strong>YAKUZA</strong> SUSHI</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ml-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Меню</a></li>
@@ -28,11 +21,7 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">О нас</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
                     <li class="nav-item ml-3"><a class="nav-link" href="tel:+79991234567">+7 (999) 123-45-67</a></li>
-                    <li class="nav-item ml-3">
-                        <a class="btn btn-danger btn-sm" href="#">
-                            <i class="fas fa-shopping-cart"></i> 1200 ₽
-                        </a>
-                    </li>
+                    <li class="nav-item ml-3"><a class="btn btn-danger btn-sm" href="#"><i class="fas fa-shopping-cart"></i> 1200 ₽</a></li>
                 </ul>
             </div>
         </div>
@@ -43,45 +32,43 @@
             <div class="col-12 col-md-6 col-lg-5">
                 <div class="card p-4">
                     <h3 class="mb-4">Добавить новое блюдо</h3>
-                    <form id="addDishForm">
+                    <form id="add-dish-form">
                         <div class="form-group">
-                            <label for="dishTitle">Название блюда</label>
-                            <input type="text" class="form-control" id="dishTitle" name="title" placeholder="Например, Сет Калифорния">
+                            <label>Название блюда</label>
+                            <input type="text" class="form-control" name="dish-name" placeholder="Например, Сет Калифорния" required>
                         </div>
                         <div class="form-group">
-                            <label for="dishCategory">Категория</label>
-                            <select class="form-control" id="dishCategory" name="category">
-                                <option value="Роллы">Роллы</option>
-                                <option value="Сеты">Сеты</option>
-                                <option value="Горячее">Горячее</option>
-                                <option value="Напитки">Напитки</option>
+                            <label>Категория</label>
+                            <select class="form-control">
+                                <option>Роллы</option>
+                                <option>Сеты</option>
+                                <option>Горячее</option>
+                                <option>Напитки</option>
                             </select>
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="dishPrice">Цена (₽)</label>
-                                    <input type="number" class="form-control" id="dishPrice" name="price" placeholder="550" min="0" step="1">
+                                    <label>Цена (₽)</label>
+                                    <input type="number" class="form-control" name="dish-price" placeholder="550" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="dishWeight">Вес (г)</label>
-                                    <input type="number" class="form-control" id="dishWeight" name="weight" placeholder="240" min="0" step="1">
+                                    <label>Вес (г)</label>
+                                    <input type="number" class="form-control" placeholder="240">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="dishDescription">Описание блюда</label>
-                            <textarea class="form-control" id="dishDescription" name="description" rows="3" placeholder="Укажите состав блюда, соусы, КБЖУ..."></textarea>
+                            <label>Описание блюда</label>
+                            <textarea class="form-control" rows="3" placeholder="Укажите состав блюда, соусы, КБЖУ..."></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="imgInput">Изображение блюда</label>
+                            <label>Изображение блюда</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="imgInput" name="image" accept="image/*">
-                                <label class="custom-file-label" for="imgInput">
-                                    <i class="fas fa-cloud-upload-alt"></i> Загрузить файл
-                                </label>
+                                <input type="file" class="custom-file-input" id="imgInput">
+                                <label class="custom-file-label" for="imgInput"><i class="fas fa-cloud-upload-alt"></i> Загрузить файл</label>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-4">
@@ -101,9 +88,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/site.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="site.js"></script>
 
-  <!-- Yandex.Metrika counter -->
+    <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -116,6 +104,5 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/114128606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-
 </body>
 </html>
