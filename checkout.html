@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -43,22 +43,22 @@
             <div class="col-12 col-md-6 col-lg-5">
                 <div class="card p-4">
                     <h3 class="mb-4">Оформление заказа</h3>
-                    <form>
+                    <form id="checkoutForm">
                         <div class="form-group">
-                            <label>ФИО</label>
-                            <input type="text" class="form-control" placeholder="Иванов Иван Иванович">
+                            <label for="checkoutFullname">ФИО</label>
+                            <input type="text" class="form-control" id="checkoutFullname" name="fullname" placeholder="Иванов Иван Иванович">
                         </div>
                         <div class="form-group">
-                            <label>Номер телефона</label>
-                            <input type="tel" class="form-control" placeholder="+7 (999) 123-45-67">
+                            <label for="checkoutPhone">Номер телефона</label>
+                            <input type="tel" class="form-control" id="checkoutPhone" name="phone" placeholder="+7 (999) 123-45-67">
                         </div>
                         <div class="form-group">
-                            <label>Адрес</label>
-                            <input type="text" class="form-control" placeholder="Комсомольский проспект 71/2">
+                            <label for="checkoutAddress">Адрес</label>
+                            <input type="text" class="form-control" id="checkoutAddress" name="address" placeholder="Комсомольский проспект 71/2">
                         </div>
                         <div class="form-group">
-                            <label>Комментарий для курьера</label>
-                            <textarea class="form-control" rows="3" placeholder="Если у вас в подъезде требуется позвонить по домофону, то выберите из списка..."></textarea>
+                            <label for="checkoutComment">Комментарий для курьера</label>
+                            <textarea class="form-control" id="checkoutComment" name="comment" rows="3" placeholder="Если у вас в подъезде требуется позвонить по домофону, то выберите из списка..."></textarea>
                         </div>
                         <p class="text-muted">Доставка 10-15 мин</p>
                         <button type="submit" class="btn btn-warning btn-lg btn-block font-weight-bold">
@@ -78,5 +78,21 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/site.js"></script>
+
+   <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114128606', 'ym');
+
+        ym(114128606, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/114128606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
 </body>
 </html>

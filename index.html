@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-    <!-- ===== НАВИГАЦИЯ ===== -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="index.html">
@@ -62,7 +61,7 @@
                         <h5 class="card-title mt-2">Филадельфия</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="text-danger font-weight-bold h5 mb-0">550 ₽</span>
-                            <button class="btn btn-warning btn-sm">В корзину</button>
+                            <button class="btn btn-warning btn-sm add-to-cart" data-product="Филадельфия" data-price="550">В корзину</button>
                         </div>
                     </div>
                 </div>
@@ -76,7 +75,7 @@
                         <h5 class="card-title mt-2">Калифорния</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="text-danger font-weight-bold h5 mb-0">490 ₽</span>
-                            <button class="btn btn-warning btn-sm">В корзину</button>
+                            <button class="btn btn-warning btn-sm add-to-cart" data-product="Калифорния" data-price="490">В корзину</button>
                         </div>
                     </div>
                 </div>
@@ -90,7 +89,7 @@
                         <h5 class="card-title mt-2">Сет Якудза</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="text-danger font-weight-bold h5 mb-0">1450 ₽</span>
-                            <button class="btn btn-warning btn-sm">В корзину</button>
+                            <button class="btn btn-warning btn-sm add-to-cart" data-product="Сет Якудза" data-price="1450">В корзину</button>
                         </div>
                     </div>
                 </div>
@@ -104,7 +103,7 @@
                         <h5 class="card-title mt-2">Креветки в панировке</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="text-danger font-weight-bold h5 mb-0">390 ₽</span>
-                            <button class="btn btn-warning btn-sm">В корзину</button>
+                            <button class="btn btn-warning btn-sm add-to-cart" data-product="Креветки в панировке" data-price="390">В корзину</button>
                         </div>
                     </div>
                 </div>
@@ -119,5 +118,21 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/site.js"></script>
+
+  <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114128606', 'ym');
+
+        ym(114128606, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/114128606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
 </body>
 </html>

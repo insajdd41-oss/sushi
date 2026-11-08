@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -66,8 +66,8 @@
                         <td class="text-danger font-weight-bold">550 ₽</td>
                         <td>240 г</td>
                         <td>
-                            <a href="#" class="text-warning mr-2"><i class="fas fa-pen"></i></a>
-                            <a href="#" class="text-danger"><i class="fas fa-trash"></i></a>
+                            <a href="#" class="text-warning mr-2 edit-dish" data-dish="Филадельфия" title="Редактировать"><i class="fas fa-pen"></i></a>
+                            <a href="#" class="text-danger delete-dish" data-dish="Филадельфия" title="Удалить"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                     <tr>
@@ -77,8 +77,8 @@
                         <td class="text-danger font-weight-bold">490 ₽</td>
                         <td>220 г</td>
                         <td>
-                            <a href="#" class="text-warning mr-2"><i class="fas fa-pen"></i></a>
-                            <a href="#" class="text-danger"><i class="fas fa-trash"></i></a>
+                            <a href="#" class="text-warning mr-2 edit-dish" data-dish="Калифорния" title="Редактировать"><i class="fas fa-pen"></i></a>
+                            <a href="#" class="text-danger delete-dish" data-dish="Калифорния" title="Удалить"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                     <tr>
@@ -88,8 +88,8 @@
                         <td class="text-danger font-weight-bold">1450 ₽</td>
                         <td>850 г</td>
                         <td>
-                            <a href="#" class="text-warning mr-2"><i class="fas fa-pen"></i></a>
-                            <a href="#" class="text-danger"><i class="fas fa-trash"></i></a>
+                            <a href="#" class="text-warning mr-2 edit-dish" data-dish="Сет Якудза" title="Редактировать"><i class="fas fa-pen"></i></a>
+                            <a href="#" class="text-danger delete-dish" data-dish="Сет Якудза" title="Удалить"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                     <tr>
@@ -99,8 +99,8 @@
                         <td class="text-danger font-weight-bold">390 ₽</td>
                         <td>180 г</td>
                         <td>
-                            <a href="#" class="text-warning mr-2"><i class="fas fa-pen"></i></a>
-                            <a href="#" class="text-danger"><i class="fas fa-trash"></i></a>
+                            <a href="#" class="text-warning mr-2 edit-dish" data-dish="Креветки в панировке" title="Редактировать"><i class="fas fa-pen"></i></a>
+                            <a href="#" class="text-danger delete-dish" data-dish="Креветки в панировке" title="Удалить"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -115,5 +115,21 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/site.js"></script>
+
+  <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114128606', 'ym');
+
+        ym(114128606, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/114128606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
 </body>
 </html>
