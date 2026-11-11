@@ -195,17 +195,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const addDishForm = document.getElementById('add-dish-form');
+     const addDishForm = document.getElementById('add-dish-form');
     if (addDishForm) {
         addDishForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = this.querySelector('input[name="dish-name"]').value;
             const price = this.querySelector('input[name="dish-price"]').value;
+            const categorySelect = this.querySelector('select');
+            const category = categorySelect.options[categorySelect.selectedIndex].text;
+            const weight = this.querySelector('input[placeholder="240"]').value || '0';
 
             if (!name || !price) {
                 Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Введите название и цену блюда.', confirmButtonColor: '#e94560' });
                 return;
             }
+
+            let dishes = JSON.parse(localStorage.getItem('customDishes')) || [];
+            dishes.push({ name: name, price: price, category: category, weight: weight });
+            localStorage.setItem('customDishes', JSON.stringify(dishes));
 
             Swal.fire({ 
                 icon: 'success', 
@@ -215,6 +222,26 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then(() => {
                 window.location.href = 'admin-menu.html';
             });
+        });
+    }
+
+    const adminTable = document.querySelector('.table tbody');
+    if (adminTable && window.location.pathname.includes('admin-menu')) {
+        let dishes = JSON.parse(localStorage.getItem('customDishes')) || [];
+        dishes.forEach((dish, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 5}</td>
+                <td>${dish.name}</td>
+                <td>${dish.category}</td>
+                <td class="text-danger font-weight-bold">${dish.price} ₽</td>
+                <td>${dish.weight} г</td>
+                <td>
+                    <a href="#" class="text-warning mr-2 edit-dish" title="Редактировать"><i class="fas fa-pen"></i></a>
+                    <a href="#" class="text-danger delete-dish" title="Удалить"><i class="fas fa-trash"></i></a>
+                </td>
+            `;
+            adminTable.appendChild(row);
         });
     }
 });
