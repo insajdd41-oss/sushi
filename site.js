@@ -1,16 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Скрипт загружен!');
 
+    let cartTotal = 0;
+    let cartCount = 0;
+
+    function updateCartDisplay() {
+        const countEl = document.getElementById('cart-count');
+        const totalEl = document.getElementById('cart-total');
+        if (countEl && totalEl) {
+            countEl.textContent = cartCount;
+            totalEl.textContent = cartTotal;
+        }
+    }
 
     document.addEventListener('click', function(e) {
         if (e.target && e.target.textContent.includes('В корзину')) {
             e.preventDefault();
+
+            const card = e.target.closest('.card');
+            if (!card) return;
+
+            const priceText = card.querySelector('.text-danger').textContent;
+            const price = parseInt(priceText.replace(/\D/g, '')); 
+
+            cartTotal += price;
+            cartCount += 1;
+            updateCartDisplay();
+
             Swal.fire({
                 icon: 'success',
                 title: 'Добавлено в корзину!',
-                text: 'Блюдо успешно добавлено.',
+                text: `Блюдо добавлено. Сумма: ${cartTotal} ₽`,
                 confirmButtonColor: '#ffc107',
-                timer: 2000
+                timer: 2000,
+                showConfirmButton: false
             });
         }
     });
