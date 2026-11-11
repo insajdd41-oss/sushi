@@ -67,4 +67,51 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('fa-trash')) {
+            e.preventDefault();
+            const row = e.target.closest('tr');
+            
+            Swal.fire({
+                title: 'Удалить блюдо?',
+                text: "Вы уверены, что хотите удалить эту позицию из меню?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e94560',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Да, удалить',
+                cancelButtonText: 'Отмена'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    row.remove();
+                    Swal.fire('Удалено!', 'Блюдо удалено из меню.', 'success');
+                }
+            });
+        }
+
+        if (e.target && e.target.classList.contains('fa-pen')) {
+            e.preventDefault();
+            const row = e.target.closest('tr');
+            const dishName = row.querySelector('td:nth-child(2)').textContent;
+            
+            Swal.fire({
+                title: 'Редактирование',
+                input: 'text',
+                inputValue: dishName,
+                inputLabel: 'Новое название блюда',
+                showCancelButton: true,
+                confirmButtonColor: '#ffc107',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Сохранить',
+                cancelButtonText: 'Отмена'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    row.querySelector('td:nth-child(2)').textContent = result.value;
+                    Swal.fire('Сохранено!', 'Название блюда обновлено.', 'success');
+                }
+            });
+        }
+    });
+
 });
