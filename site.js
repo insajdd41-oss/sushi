@@ -15,7 +15,7 @@ document.addEventListener('click', function(e) {
         }
         cart.push({ name: name, price: price });
         localStorage.setItem('cart', JSON.stringify(cart));
-        
+
         let total = 0;
         for (let i = 0; i < cart.length; i++) {
             total += cart[i].price;
