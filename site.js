@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- КОРЗИНА ---
     let total = 0;
     try {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -69,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- АДМИНКА (УДАЛЕНИЕ И РЕДАКТИРОВАНИЕ) ---
     document.addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('fa-trash')) {
             e.preventDefault();
@@ -114,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- ФОРМА ОТЗЫВОВ (ДОБАВЛЕНО!) ---
     const reviewForm = document.getElementById('review-form');
     if (reviewForm) {
         reviewForm.addEventListener('submit', function(e) {
@@ -145,6 +142,78 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: 'Спасибо за отзыв!', 
                 text: 'Ваше мнение очень важно для нас.', 
                 confirmButtonColor: '#ffc107' 
+            });
+        });
+    }
+
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+
+            if (!name || !email || !message) {
+                Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Пожалуйста, заполните все поля.', confirmButtonColor: '#e94560' });
+                return;
+            }
+
+            Swal.fire({ 
+                icon: 'success', 
+                title: 'Сообщение отправлено!', 
+                text: 'Мы свяжемся с вами в ближайшее время.', 
+                confirmButtonColor: '#ffc107' 
+            }).then(() => {
+                contactForm.reset();
+            });
+        });
+    }
+
+    const checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fio = this.querySelector('input[name="fio"]').value;
+            const phone = this.querySelector('input[name="phone"]').value;
+            const address = this.querySelector('input[name="address"]').value;
+
+            if (!fio || !phone || !address) {
+                Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Заполните ФИО, телефон и адрес.', confirmButtonColor: '#e94560' });
+                return;
+            }
+
+            localStorage.removeItem('cart'); 
+            Swal.fire({ 
+                icon: 'success', 
+                title: 'Заказ оформлен!', 
+                text: 'Курьер уже выехал к вам.', 
+                confirmButtonColor: '#ffc107' 
+            }).then(() => {
+                window.location.href = 'index.html';
+            });
+        });
+    }
+
+    const addDishForm = document.getElementById('add-dish-form');
+    if (addDishForm) {
+        addDishForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = this.querySelector('input[name="dish-name"]').value;
+            const price = this.querySelector('input[name="dish-price"]').value;
+
+            if (!name || !price) {
+                Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Введите название и цену блюда.', confirmButtonColor: '#e94560' });
+                return;
+            }
+
+            Swal.fire({ 
+                icon: 'success', 
+                title: 'Блюдо добавлено!', 
+                text: 'Новая позиция появилась в меню.', 
+                confirmButtonColor: '#ffc107' 
+            }).then(() => {
+                window.location.href = 'admin-menu.html';
             });
         });
     }
