@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // --- КОРЗИНА ---
     let total = 0;
     try {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -68,11 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // --- АДМИНКА (УДАЛЕНИЕ И РЕДАКТИРОВАНИЕ) ---
     document.addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('fa-trash')) {
             e.preventDefault();
             const row = e.target.closest('tr');
-            
             Swal.fire({
                 title: 'Удалить блюдо?',
                 text: "Вы уверены, что хотите удалить эту позицию из меню?",
@@ -94,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const row = e.target.closest('tr');
             const dishName = row.querySelector('td:nth-child(2)').textContent;
-            
             Swal.fire({
                 title: 'Редактирование',
                 input: 'text',
@@ -114,4 +114,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // --- ФОРМА ОТЗЫВОВ (ДОБАВЛЕНО!) ---
+    const reviewForm = document.getElementById('review-form');
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('review-name').value;
+            const text = document.getElementById('review-text').value;
+
+            if (!name || !text) {
+                Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Заполните все поля.', confirmButtonColor: '#e94560' });
+                return;
+            }
+
+            const reviewsList = document.getElementById('reviews-list');
+            if (reviewsList) {
+                const newReview = document.createElement('div');
+                newReview.className = 'mb-3 p-3';
+                newReview.style.backgroundColor = '#0f0f1a';
+                newReview.style.borderRadius = '8px';
+                newReview.innerHTML = '<strong class="text-warning">' + name + '</strong> <small class="text-muted ml-2">Только что</small><p class="mb-0 mt-2">' + text + '</p>';
+                reviewsList.prepend(newReview);
+            }
+            
+            document.getElementById('review-name').value = '';
+            document.getElementById('review-text').value = '';
+
+            Swal.fire({ 
+                icon: 'success', 
+                title: 'Спасибо за отзыв!', 
+                text: 'Ваше мнение очень важно для нас.', 
+                confirmButtonColor: '#ffc107' 
+            });
+        });
+    }
 });
