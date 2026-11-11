@@ -1,9 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    // Функция получения корзины
     function getCart() {
         return JSON.parse(localStorage.getItem('cart')) || [];
     }
 
+    // Функция сохранения корзины
+    function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Обновление суммы в шапке
     function updateCartDisplay() {
         const cart = getCart();
         const totalSum = cart.reduce((sum, item) => sum + item.price, 0);
@@ -12,10 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // --- 1. ДОБАВЛЕНИЕ В КОРЗИНУ (на главной) ---
     document.addEventListener('click', function(e) {
         if (e.target && e.target.textContent.includes('В корзину')) {
             e.preventDefault();
-            
             const card = e.target.closest('.card');
             if (!card) return;
 
@@ -25,8 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let cart = getCart();
             cart.push({ name: name, price: price });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            
+            saveCart(cart);
             updateCartDisplay();
 
             Swal.fire({
@@ -40,58 +46,64 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // --- 2. ОТОБРАЖЕНИЕ КОРЗИНЫ (на странице cart.html) ---
     const cartContainer = document.getElementById('cart-container');
     if (cartContainer) {
         let cart = getCart();
         const totalEl = document.getElementById('total-price');
         
         if (cart.length === 0) {
-            cartContainer.innerHTML = '<p class="text-muted">Ваша корзина пуста.</p>';
+            cartContainer.innerHTML = '<div class="col-12"><p class="text-muted">Ваша корзина пуста.</p></div>';
             totalEl.textContent = '0';
         } else {
             let total = 0;
-            cartContainer.innerHTML = cart.map((item, index) => {
-                total += item.price;
-                return `
+            let html = '';
+            
+            for (let i = 0; i < cart.length; i++) {
+                total += cart[i].price;
+                html += `
                 <div class="col-12 mb-3">
                     <div class="card p-3 d-flex flex-row justify-content-between align-items-center">
-                        <h5 class="mb-0">${item.name}</h5>
+                        <h5 class="mb-0 text-light">${cart[i].name}</h5>
                         <div>
-                            <span class="text-danger font-weight-bold mr-4">${item.price} ₽</span>
-                            <button class="btn btn-sm btn-outline-danger remove-item" data-index="${index}">
+                            <span class="text-danger font-weight-bold mr-4">${cart[i].price} ₽</span>
+                            <button class="btn btn-sm btn-outline-danger remove-item" data-index="${i}">
                                 <i class="fas fa-trash"></i> Удалить
                             </button>
                         </div>
                     </div>
                 </div>`;
-            }).join('');
-            totalEl.textContent = total;
+            }
             
+            cartContainer.innerHTML = html;
+            totalEl.textContent = total;
+
+            // Удаление товара
             document.querySelectorAll('.remove-item').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const index = this.getAttribute('data-index');
+                    const index = parseInt(this.getAttribute('data-index'));
                     let cart = getCart();
                     cart.splice(index, 1);
-                    localStorage.setItem('cart', JSON.stringify(cart));
+                    saveCart(cart);
                     location.reload(); 
                 });
             });
         }
     }
 
-    updateCartDisplay(); 
+    updateCartDisplay();
+
+    // --- 3. ОСТАЛЬНОЕ (Отзывы, Заказы, Админка) ---
     const reviewForm = document.getElementById('review-form');
     if (reviewForm) {
         reviewForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('review-name').value;
             const text = document.getElementById('review-text').value;
-
             if (!name || !text) {
                 Swal.fire({ icon: 'error', title: 'Ошибка!', text: 'Заполните все поля.', confirmButtonColor: '#e94560' });
                 return;
             }
-
             const reviewsList = document.getElementById('reviews-list');
             if (reviewsList) {
                 const newReview = document.createElement('div');
@@ -110,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            localStorage.removeItem('cart'); // Очищаем корзину после заказа
+            localStorage.removeItem('cart'); 
             Swal.fire({ icon: 'success', title: 'Заказ оформлен!', text: 'Курьер уже выехал к вам.', confirmButtonColor: '#ffc107' }).then(() => {
                 window.location.href = 'index.html';
             });
