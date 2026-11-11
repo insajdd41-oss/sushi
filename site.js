@@ -1,41 +1,43 @@
-document.addEventListener('click', function(e) {
-    if (e.target && e.target.textContent.includes('В корзину')) {
-        e.preventDefault();
-        const card = e.target.closest('.card');
-        if (!card) return;
+window.onload = function() {
+    // 1. ДОБАВЛЕНИЕ В КОРЗИНУ
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.textContent.includes('В корзину')) {
+            e.preventDefault();
+            const card = e.target.closest('.card');
+            if (!card) return;
 
-        const name = card.querySelector('.card-title').textContent;
-        const priceText = card.querySelector('.text-danger').textContent;
-        const price = parseInt(priceText.replace(/\D/g, ''));
+            const name = card.querySelector('.card-title').textContent;
+            const priceText = card.querySelector('.text-danger').textContent;
+            const price = parseInt(priceText.replace(/\D/g, ''));
 
-        let cart = [];
-        let saved = localStorage.getItem('cart');
-        if (saved) {
-            cart = JSON.parse(saved);
+            let cart = [];
+            let saved = localStorage.getItem('cart');
+            if (saved) {
+                cart = JSON.parse(saved);
+            }
+            cart.push({ name: name, price: price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            let total = 0;
+            for (let i = 0; i < cart.length; i++) {
+                total += cart[i].price;
+            }
+            const cartElements = document.querySelectorAll('.cart-total');
+            for (let i = 0; i < cartElements.length; i++) {
+                cartElements[i].textContent = total;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Добавлено!',
+                text: name + ' добавлен.',
+                timer: 1500,
+                showConfirmButton: false
+            });
         }
-        cart.push({ name: name, price: price });
-        localStorage.setItem('cart', JSON.stringify(cart));
+    });
 
-        let total = 0;
-        for (let i = 0; i < cart.length; i++) {
-            total += cart[i].price;
-        }
-        const cartElements = document.querySelectorAll('.cart-total');
-        for (let i = 0; i < cartElements.length; i++) {
-            cartElements[i].textContent = total;
-        }
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Добавлено!',
-            text: name + ' добавлен.',
-            timer: 1500,
-            showConfirmButton: false
-        });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
+    // 2. ОТОБРАЖЕНИЕ КОРЗИНЫ
     const cartContainer = document.getElementById('cart-container');
     if (cartContainer) {
         let cart = [];
@@ -71,4 +73,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-});
+    
+    // 3. ОБНОВЛЕНИЕ ЦИФРЫ В ШАПКЕ ПРИ ЗАГРУЗКЕ
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+        total += cart[i].price;
+    }
+    const cartElements = document.querySelectorAll('.cart-total');
+    for (let i = 0; i < cartElements.length; i++) {
+        cartElements[i].textContent = total;
+    }
+};
